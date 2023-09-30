@@ -132,5 +132,13 @@ const user_data = {
         "Worked with many clients to create websites and web applications.",
     },
   ],
+  skills: {
+    "Front End": ["React", "TypeScript", "HTML/CSS", "JavaScript"],
+    "Back End": ["Node.js", "Express", "Django", "Flask"],
+    Database: ["MongoDB", "PostgreSQL", "MySQL", "SQLite"],
+    "Version Control": ["Git", "GitHub", "GitLab", "Bitbucket"],
+    Cloud: ["AWS", "Azure", "Heroku", "Netlify"],
+    Testing: ["Jest", "Mocha", "Chai", "Cypress"],
+  },
 };
 export default user_data;
