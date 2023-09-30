@@ -284,15 +284,21 @@ const AdminPanel = () => {
 
 export default AdminPanel;
 
-const MarkdownEditor = (
-    {
-        setContent,
-    } = {
-            setContent: (content: string) => { }
-        }
-) => {
+const MarkdownEditor: React.FC<{ setContent: (content: string) => void }> = ({ setContent }) => {
     const [markdown, setMarkdown] = useState<string>('');
     const [htmlOutput, setHtmlOutput] = useState<string>('');
+
+    useEffect(() => {
+        const savedContent = localStorage.getItem('markdownContent');
+        if (savedContent) {
+            setMarkdown(savedContent);
+            setContent(savedContent);
+        }
+    }, [setContent]);
+
+    useEffect(() => {
+        localStorage.setItem('markdownContent', markdown);
+    }, [markdown]);
 
     useEffect(() => {
         remark()
@@ -303,7 +309,7 @@ const MarkdownEditor = (
 
     const handleMarkdownChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMarkdown(event.target.value);
-        setContent(event.target.value)
+        setContent(event.target.value);
     };
 
     return (
@@ -319,15 +325,11 @@ const MarkdownEditor = (
             </div>
 
             <div className="flex-1 p-4">
-                <h2 className="text-lg font-semibold mb-4">
-                    Output
-                </h2>
-                <ScrollArea className="h-[75vh]">
-                    <div
-                        className="prose dark:prose-invert w-full h-[75vh] p-2 border rounded-md overflow-y-scroll"
-                        dangerouslySetInnerHTML={{ __html: htmlOutput }}
-                    />
-                </ScrollArea>
+                <h2 className="text-lg font-semibold mb-4">Output</h2>
+                <div
+                    className="prose dark:prose-invert w-full h-[75vh] p-2 border rounded-md overflow-y-scroll"
+                    dangerouslySetInnerHTML={{ __html: htmlOutput }}
+                />
             </div>
         </div>
     );
