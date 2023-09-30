@@ -85,5 +85,52 @@ const user_data = {
       },
     },
   ],
+  experience: [
+    {
+      title: "Software Engineer",
+      company: "Google",
+      location: "Mountain View, CA",
+      startDate: "2019-01-01",
+      endDate: "Present",
+      description:
+        "Collaborating with designers and product managers to create a user-friendly interface",
+    },
+    {
+      title: "Software Engineer",
+      company: "Facebook",
+      location: "Menlo Park, CA",
+      startDate: "2017-01-01",
+      endDate: "2018-12-31",
+      description:
+        "Worked on the Instagram team to create new features and designs.",
+    },
+    {
+      title: "Software Engineer",
+      company: "Amazon",
+      location: "Seattle, WA",
+      startDate: "2015-01-01",
+      endDate: "2016-12-31",
+      description:
+        "Implemented new features and designs for the Amazon website.",
+    },
+    {
+      title: "Frontend Intern",
+      company: "Microsoft",
+      location: "Redmond, WA",
+      startDate: "2014-01-01",
+      endDate: "2014-12-31",
+      description:
+        "Worked on the Outlook team to create new features and designs.",
+    },
+    {
+      title: "Freelance Web Developer",
+      company: "Self-Employed",
+      location: "San Francisco, CA",
+      startDate: "2013-01-01",
+      endDate: "2013-12-31",
+      description:
+        "Worked with many clients to create websites and web applications.",
+    },
+  ],
 };
 export default user_data;
