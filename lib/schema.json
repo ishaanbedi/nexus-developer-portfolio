@@ -28,6 +28,23 @@
           "type": "text"
         }
       ]
+    },
+    {
+      "name": "Contact",
+      "columns": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "message",
+          "type": "text"
+        }
+      ]
     }
   ]
 }

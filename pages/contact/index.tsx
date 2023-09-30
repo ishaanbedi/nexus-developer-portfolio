@@ -5,6 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import axios from 'axios';
+import { useToast } from "@/components/ui/use-toast"
+import { useState } from 'react';
+import { Loader } from 'lucide-react';
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -14,6 +18,8 @@ const formSchema = z.object({
 
 
 const ContactPage = () => {
+    const { toast } = useToast()
+    const [loading, setLoading] = useState(false)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema as any),
         defaultValues: {
@@ -23,8 +29,20 @@ const ContactPage = () => {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true)
+        const body = {
+            name: values.name,
+            email: values.email,
+            message: values.message,
+        };
+        await axios.post('/api/contactMessage', body);
+        setLoading(false)
+        toast({
+            title: "Message Sent",
+            description: "Thank you for reaching out to me. I will get back to you as soon as possible.",
+        })
+        form.reset()
     }
 
     return (
@@ -80,7 +98,14 @@ const ContactPage = () => {
                             <span className="text-red-300 text-sm">{form.formState.errors.message.message}</span>
                         )}
                     </div>
-                    <Button>Submit</Button>
+                    <Button disabled={loading} type="submit">
+                        <span className={`${!loading ? 'inline-block' : 'hidden'}`}>
+                            Send
+                        </span>
+                        <span className={`${loading ? 'inline-block' : 'hidden'}`}>
+                            <Loader className="animate-spin" />
+                        </span>
+                    </Button>
                 </form>
             </Card>
         </section>

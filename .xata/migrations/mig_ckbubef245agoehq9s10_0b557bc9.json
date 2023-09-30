@@ -1,10 +1,15 @@
 {
-  "id": "mig_ckbto4nes1c46u46ca2g",
-  "checksum": "1:f6567c1f5248a3f63bfc54ee8229d536931c70cb0d86fcb097e4d91097c8bf72",
+  "id": "mig_ckbubef245agoehq9s10",
+  "checksum": "1:0b557bc9022ab118d598088d9e85b47769078c836dd876b39ea6abd57d1b7228",
   "operations": [
     {
       "addTable": {
         "table": "Posts"
+      }
+    },
+    {
+      "addTable": {
+        "table": "Contact"
       }
     },
     {
@@ -59,6 +64,33 @@
           "type": "text"
         },
         "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "Contact"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "email"
+        },
+        "table": "Contact"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "message",
+          "type": "text"
+        },
+        "table": "Contact"
       }
     }
   ]
