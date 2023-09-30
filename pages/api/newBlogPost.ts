@@ -4,6 +4,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const xata = getXataClient();
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
   try {
     const records = await xata.db.Posts.filter("slug", req.body.slug)
       .select(["slug"])

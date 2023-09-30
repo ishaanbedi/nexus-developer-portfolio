@@ -7,6 +7,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed" });
+    return;
+  }
   const base64Image = req.body.base64.split(";base64,").pop();
   const record = await xata.db.ImageUploadPlugin.create({
     name: req.body.name,
