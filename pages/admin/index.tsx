@@ -24,6 +24,9 @@ const AdminPanel = () => {
     const [blogContent, setBlogContent] = useState('')
     const [blogSlug, setBlogSlug] = useState('')
     const [loading, setLoading] = useState(false)
+    const [image, setImage] = useState<File | null>(null)
+    const [imageLink, setImageLink] = useState<string>('')
+    const [showImageProcessed, setShowImageProcessed] = useState(false)
     const verifyPassword = async () => {
         try {
             const { data } = await axios.post('/api/verifyAdminPanel', { password })
@@ -63,7 +66,6 @@ const AdminPanel = () => {
     if (showAdminPanel) {
         return (
             <section className='px-2'>
-
                 <div className="flex space-x-2">
                     <Button onClick={() => {
                         setShowAdminPanel(false)
@@ -81,98 +83,197 @@ const AdminPanel = () => {
                             <MarkdownEditor
                                 setContent={setBlogContent}
                             />
-                            <Dialog>
-                                <DialogTrigger>
-                                    <Button
-                                        disabled={loading}
-                                    >
-                                        {loading ? "Publishing..." : "Publish"}
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>
-                                            Publish Blog
-                                        </DialogTitle>
+                            <div className="flex justify-center items-center space-x-2">
+                                <Dialog>
+                                    <DialogTrigger>
+                                        <Button
+                                            disabled={loading}
+                                        >
+                                            {loading ? "Publishing..." : "Publish"}
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <DialogHeader>
+                                            <DialogTitle>
+                                                Publish Blog
+                                            </DialogTitle>
+                                            <section className="flex flex-col space-y-2">
+                                                <Input
+                                                    placeholder="Enter the blog title..."
+                                                    type="text"
+                                                    id="title"
+                                                    className="mt-3"
+                                                    value={blogTitle}
+                                                    onChange={(e) => setBlogTitle(e.target.value)}
+                                                />
+                                                <Input
+                                                    placeholder="Enter the blog description..."
+                                                    type="text"
+                                                    id="description"
+                                                    className=""
+                                                    value={blogDescription}
+                                                    onChange={(e) => setBlogDescription(e.target.value)}
+                                                />
+                                                <Input
+                                                    placeholder="Enter the blog slug..."
+                                                    type="text"
+                                                    id="slug"
+                                                    className=""
+                                                    value={blogSlug}
+                                                    onChange={(e) => {
+                                                        const allowedCharacters = /^[a-zA-Z0-9-]*$/
+                                                        const slug = e.target.value
+                                                        const slugWithoutSpaces = slug.replace(/\s+/g, '-').toLowerCase()
+                                                        if (slugWithoutSpaces.match(allowedCharacters)) {
+                                                            const slugWithoutConsecutiveDashes = slugWithoutSpaces.replace(/--+/g, '-')
+                                                            setBlogSlug(slugWithoutConsecutiveDashes)
+                                                        }
+                                                    }}
+                                                />
+                                                <Button
+                                                    disabled={loading}
+                                                    onClick={async () => {
+                                                        setLoading(true)
+                                                        if (blogTitle === '' || blogDescription === '' || blogContent === '' || blogSlug === '') {
+                                                            toast({
+                                                                variant: "destructive",
+                                                                title: "Uh oh!",
+                                                                description: "Please fill all the fields"
+                                                            })
+                                                            setLoading(false)
+                                                            return
+                                                        }
+                                                        const object = {
+                                                            title: blogTitle,
+                                                            slug: blogSlug,
+                                                            description: blogDescription,
+                                                            body: blogContent
+                                                        }
+                                                        const { data } = await axios.post('/api/newBlogPost', object)
+                                                        if (data.success) {
+                                                            toast({
+                                                                title: "Success!",
+                                                                description: "Blog published successfully"
+                                                            })
+                                                            setBlogTitle('')
+                                                            setBlogDescription('')
+                                                            setBlogContent('')
+                                                            setBlogSlug('')
+                                                        } else {
+                                                            toast({
+                                                                variant: "destructive",
+                                                                title: "Error!",
+                                                                description: data.message
+                                                            })
+                                                            setLoading(false)
+                                                        }
+                                                        setLoading(false)
+                                                    }}
+                                                >
+                                                    {loading ? "Publishing..." : "Publish"}
+                                                </Button>
+                                            </section>
+                                        </DialogHeader>
+                                    </DialogContent>
+                                </Dialog>
+
+                                <Dialog>
+                                    <DialogTrigger>
+                                        <Button>
+                                            Image Plugin
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent>
+                                        <DialogHeader>
+                                            <DialogTitle>Image &rarr; URL Plugin</DialogTitle>
+                                        </DialogHeader>
                                         <section className="flex flex-col space-y-2">
                                             <Input
-                                                placeholder="Enter the blog title..."
-                                                type="text"
-                                                id="title"
-                                                className="mt-3"
-                                                value={blogTitle}
-                                                onChange={(e) => setBlogTitle(e.target.value)}
-                                            />
-                                            <Input
-                                                placeholder="Enter the blog description..."
-                                                type="text"
-                                                id="description"
-                                                className=""
-                                                value={blogDescription}
-                                                onChange={(e) => setBlogDescription(e.target.value)}
-                                            />
-                                            <Input
-                                                placeholder="Enter the blog slug..."
-                                                type="text"
-                                                id="slug"
-                                                className=""
-                                                value={blogSlug}
+                                                accept="image/*"
+                                                id="picture" type="file"
                                                 onChange={(e) => {
-                                                    const allowedCharacters = /^[a-zA-Z0-9-]*$/
-                                                    const slug = e.target.value
-                                                    const slugWithoutSpaces = slug.replace(/\s+/g, '-').toLowerCase()
-                                                    if (slugWithoutSpaces.match(allowedCharacters)) {
-                                                        const slugWithoutConsecutiveDashes = slugWithoutSpaces.replace(/--+/g, '-')
-                                                        setBlogSlug(slugWithoutConsecutiveDashes)
+                                                    if (e.target.files !== null) {
+                                                        setImage(e.target.files[0])
                                                     }
                                                 }}
                                             />
-                                            <Button
-                                                disabled={loading}
+                                            {!showImageProcessed && (<Button
+                                                disabled={image === null || loading}
                                                 onClick={async () => {
                                                     setLoading(true)
-                                                    if (blogTitle === '' || blogDescription === '' || blogContent === '' || blogSlug === '') {
+                                                    if (image === null) {
                                                         toast({
                                                             variant: "destructive",
-                                                            title: "Uh oh!",
-                                                            description: "Please fill all the fields"
+                                                            title: "Please select an image"
                                                         })
                                                         setLoading(false)
                                                         return
                                                     }
-                                                    const object = {
-                                                        title: blogTitle,
-                                                        slug: blogSlug,
-                                                        description: blogDescription,
-                                                        body: blogContent
+                                                    const base64 = await new Promise((resolve, reject) => {
+                                                        const reader = new FileReader();
+                                                        reader.readAsDataURL(image);
+                                                        reader.onload = () => resolve(reader.result);
+                                                        reader.onerror = error => reject(error);
                                                     }
-                                                    const { data } = await axios.post('/api/newBlogPost', object)
-                                                    if (data.success) {
-                                                        toast({
-                                                            title: "Success!",
-                                                            description: "Blog published successfully"
+                                                    )
+                                                    try {
+                                                        const { data } = await axios.post('/api/uploadImage', {
+                                                            base64: base64,
+                                                            name: image.name
                                                         })
-                                                        setBlogTitle('')
-                                                        setBlogDescription('')
-                                                        setBlogContent('')
-                                                        setBlogSlug('')
-                                                    } else {
+                                                        if (data.image_file.url) {
+                                                            setImageLink(data.image_file.url)
+                                                            setShowImageProcessed(true)
+                                                        }
+                                                    } catch (error) {
                                                         toast({
                                                             variant: "destructive",
-                                                            title: "Error!",
-                                                            description: data.message
+                                                            title: "Something went wrong...",
                                                         })
-                                                        setLoading(false)
                                                     }
                                                     setLoading(false)
-                                                }}
-                                            >
-                                                Publish
-                                            </Button>
+
+                                                }}>
+                                                Get URL
+                                            </Button>)}
+
+                                            {showImageProcessed && (
+                                                <div className="flex flex-col space-y-2">
+                                                    <Button onClick={() => {
+                                                        navigator.clipboard.writeText(imageLink)
+                                                        toast({
+                                                            title: "Success!",
+                                                            description: "Image URL copied to clipboard"
+                                                        })
+                                                        setShowImageProcessed(false)
+                                                        setImageLink('')
+                                                        setImage(null)
+                                                    }
+                                                    }>
+                                                        Copy Image URL
+                                                    </Button>
+                                                    <Button onClick={() => {
+                                                        navigator.clipboard.writeText(
+                                                            `![${image?.name}](${imageLink})`
+                                                        )
+                                                        toast({
+                                                            title: "Success!",
+                                                            description: "Image URL copied to clipboard"
+                                                        })
+                                                        setShowImageProcessed(false)
+                                                        setImageLink('')
+                                                        setImage(null)
+                                                    }
+                                                    }>
+                                                        Copy as Markdown Image
+                                                    </Button>
+                                                </div>
+                                            )}
                                         </section>
-                                    </DialogHeader>
-                                </DialogContent>
-                            </Dialog>
+                                    </DialogContent>
+                                </Dialog>
+                            </div>
+
                         </DialogContent>
                     </Dialog>
                 </div>

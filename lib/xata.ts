@@ -26,6 +26,13 @@ const tables = [
       { name: "message", type: "text" },
     ],
   },
+  {
+    name: "ImageUploadPlugin",
+    columns: [
+      { name: "image_file", type: "file" },
+      { name: "name", type: "string" },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -37,9 +44,13 @@ export type PostsRecord = Posts & XataRecord;
 export type Contact = InferredTypes["Contact"];
 export type ContactRecord = Contact & XataRecord;
 
+export type ImageUploadPlugin = InferredTypes["ImageUploadPlugin"];
+export type ImageUploadPluginRecord = ImageUploadPlugin & XataRecord;
+
 export type DatabaseSchema = {
   Posts: PostsRecord;
   Contact: ContactRecord;
+  ImageUploadPlugin: ImageUploadPluginRecord;
 };
 
 const DatabaseClient = buildClient();

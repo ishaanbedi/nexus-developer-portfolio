@@ -1,0 +1,16 @@
+{
+  "id": "mig_ckc09lves1c46u46ceq0",
+  "parentID": "mig_ckc09enes1c46u46cep0",
+  "checksum": "1:ea7a4d23cd14994686751723f0bfdd440d1af82fa193dcad2c72d85f7d8a3ec4",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "image_file",
+          "type": "file"
+        },
+        "table": "ImageUploadPlugin"
+      }
+    }
+  ]
+}

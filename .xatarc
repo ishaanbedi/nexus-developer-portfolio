@@ -1,6 +1,6 @@
 {
   "databaseURL": "https://Ishaan-Bedi-s-workspace-tbb9k6.eu-west-1.xata.sh/db/nexus-developer-portfolio",
   "codegen": {
-    "output": "src/xata.ts"
+    "output": "lib/xata.ts"
   }
 }
