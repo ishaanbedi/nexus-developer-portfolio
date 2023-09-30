@@ -18,7 +18,7 @@ This project demonstrates the creation of a developer portfolio website using th
 
 ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/ishaanbedi nexus-developer-portfolio.git`
+1. Clone the repository: `git clone https://github.com/ishaanbedi/nexus-developer-portfolio.git`
 2. Install dependencies: `npm install`
 3. Configure Xata credentials and settings.
 4. Run the development server: `npm run dev`
