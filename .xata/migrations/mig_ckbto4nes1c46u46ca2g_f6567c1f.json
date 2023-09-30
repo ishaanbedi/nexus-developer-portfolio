@@ -1,0 +1,65 @@
+{
+  "id": "mig_ckbto4nes1c46u46ca2g",
+  "checksum": "1:f6567c1f5248a3f63bfc54ee8229d536931c70cb0d86fcb097e4d91097c8bf72",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "title",
+          "type": "string"
+        },
+        "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "slug",
+          "type": "string"
+        },
+        "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "description",
+          "type": "string"
+        },
+        "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "published",
+          "type": "datetime"
+        },
+        "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "views",
+          "type": "int"
+        },
+        "table": "Posts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "body",
+          "type": "text"
+        },
+        "table": "Posts"
+      }
+    }
+  ]
+}

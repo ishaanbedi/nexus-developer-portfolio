@@ -1,0 +1,33 @@
+{
+  "tables": [
+    {
+      "name": "Posts",
+      "columns": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "slug",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "published",
+          "type": "datetime"
+        },
+        {
+          "name": "views",
+          "type": "int"
+        },
+        {
+          "name": "body",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
