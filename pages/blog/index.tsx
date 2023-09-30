@@ -45,7 +45,6 @@ const BlogPage = () => {
                     query: searchParams.q
                 }
             });
-            console.log(data);
             setPosts(data);
         } catch (error) {
             console.error('Error searching posts:', error);
