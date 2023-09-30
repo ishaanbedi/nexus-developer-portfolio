@@ -11,10 +11,15 @@ import { Badge } from "@/components/ui/badge"
 import { Github, MousePointerClick } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
+import Head from "next/head";
 const ProjectsPage = () => {
     const router = useRouter();
     return (
         <section className="pt-3 pb-28 px-5">
+            <Head>
+                <title>Projects</title>
+                <meta name="description" content="Projects" />
+            </Head>
             <div className="flex flex-col space-y-3">
                 <h1 className="font-bold lg:text-4xl text-2xl bg-gradient-to-br dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 from-gray-400 via-gray-600 to-gray-800 bg-clip-text text-transparent">
                     Projects

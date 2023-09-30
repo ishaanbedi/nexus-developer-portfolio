@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -70,7 +71,11 @@ const DyanmicBlogPostPage = () => {
 
                 {post ? (
                     <div className="pb-24">
-                        <h1 className="text-3xl mb-2">{post.title}</h1>
+                        <Head>
+                            <title>{post.title}</title>
+                            <meta name="description" content={post.description} />
+                        </Head>
+                        <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
                         <p className="text-sm mb-4 text-secondary-foreground">
                             {new Date(post.published).toLocaleDateString('en-US', {
                                 day: 'numeric',

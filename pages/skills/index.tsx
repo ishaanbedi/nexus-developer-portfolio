@@ -1,8 +1,13 @@
 import { Card } from "@/components/ui/card";
 import user_data from "@/lib/data";
+import Head from "next/head";
 const SkillsPage = () => {
     return (
         <section className="pt-3 pb-28 px-5">
+            <Head>
+                <title>Technical Skills</title>
+                <meta name="description" content="Technical Skills" />
+            </Head>
             <div>
                 <h1 className="font-bold lg:text-4xl text-2xl bg-gradient-to-br dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 from-gray-400 via-gray-600 to-gray-800 bg-clip-text text-transparent">
                     Technical Skills

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import Head from 'next/head';
 
 interface Post {
     published: string;
@@ -66,6 +67,10 @@ const BlogPage = () => {
 
     return (
         <section className='px-2'>
+            <Head>
+                <title>Blog</title>
+                <meta name="description" content="Blog" />
+            </Head>
             <div className="mt-8">
                 <form>
                     <Input

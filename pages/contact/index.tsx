@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useToast } from "@/components/ui/use-toast"
 import { useState } from 'react';
 import { Loader } from 'lucide-react';
+import Head from 'next/head';
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -47,6 +48,10 @@ const ContactPage = () => {
 
     return (
         <section className='flex justify-center items-center h-[70vh]'>
+            <Head>
+                <title>Contact Me</title>
+                <meta name="description" content="Contact Me" />
+            </Head>
             <Card className='p-4 mx-2 lg:md:sm:w-1/2 w-full border border-primary/20'>
                 <h1 className="font-bold lg:text-2xl text-xl bg-gradient-to-br dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 from-gray-400 via-gray-600 to-gray-800 bg-clip-text text-transparent pb-3">
                     Contact Me

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast"
+import Head from "next/head";
 
 const AdminPanel = () => {
     const { toast } = useToast()
@@ -314,6 +315,10 @@ const MarkdownEditor: React.FC<{ setContent: (content: string) => void }> = ({ s
 
     return (
         <div className="flex">
+            <Head>
+                <title>Admin Panel</title>
+                <meta name="description" content="Admin Panel" />
+            </Head>
             <div className="flex-1 p-4">
                 <h2 className="text-lg font-semibold mb-4">Markdown Input</h2>
                 <Textarea
