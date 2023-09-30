@@ -23,7 +23,15 @@ const BlogPage = () => {
     const getPosts = async () => {
         try {
             const { data } = await axios.get<Post[]>('/api/getPosts');
-            console.log(data);
+            data.sort((a, b) => {
+                if (a.published > b.published) {
+                    return -1;
+                } else if (a.published < b.published) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
             setPosts(data);
         } catch (error) {
             console.error('Error fetching posts:', error);
