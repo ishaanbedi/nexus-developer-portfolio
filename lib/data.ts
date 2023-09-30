@@ -23,5 +23,67 @@ const user_data = {
       `I am currently working as a software engineer at Google. I am also working on a few side projects to improve my skills and learn new technologies.`,
     ],
   },
+  projects: [
+    {
+      title: "E-commerce Website",
+      description:
+        "An e-commerce platform for buying and selling products online with Stripe integration.",
+      techStack: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+      links: {
+        github: "https://github.com/johndoe/ecommerce-website",
+        live: "https://www.example.com/ecommerce",
+      },
+    },
+    {
+      title: "Blogging Platform",
+      description:
+        "A blog website where users can create, edit, and publish articles. It includes user authentication and a comment system.",
+      techStack: ["Django", "Python", "PostgreSQL", "HTML/CSS", "Django"],
+      links: {
+        github: "https://github.com/johndoe/blog-platform",
+        live: "https://www.example.com/blog",
+      },
+    },
+    {
+      title: "Weather App",
+      description:
+        "A weather application that provides real-time weather information based on user's location or a search query.",
+      techStack: ["Vue.js", "OpenWeatherMap API", "Axios", "SCSS"],
+      links: {
+        github: "https://github.com/johndoe/weather-app",
+        live: "https://www.example.com/weather",
+      },
+    },
+    {
+      title: "Expense Tracker",
+      description:
+        "An application to help users track their income and expenses. It provides insights into spending habits.",
+      techStack: ["React Native", "Firebase", "Redux", "Expo"],
+      links: {
+        github: "https://github.com/johndoe/expense-tracker",
+        live: "https://www.example.com/expenses",
+      },
+    },
+    {
+      title: "Portfolio Website",
+      description:
+        "Your own portfolio website to showcase your skills, projects, and contact information.",
+      techStack: ["HTML", "CSS", "JavaScript", "Bootstrap"],
+      links: {
+        github: "https://github.com/johndoe/portfolio-website",
+        live: "https://www.example.com/portfolio",
+      },
+    },
+    {
+      title: "Recipe Finder",
+      description:
+        "An app that allows users to search for recipes based on ingredients they have on hand.",
+      techStack: ["Angular", "Spoonacular API", "RxJS", "Material Design"],
+      links: {
+        github: "https://github.com/johndoe/recipe-finder",
+        live: "https://www.example.com/recipes",
+      },
+    },
+  ],
 };
 export default user_data;
